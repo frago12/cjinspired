@@ -1,9 +1,9 @@
 (function(window, undefined) {
 	'use strict';
 
-	var stage = new GameStage( window.document.getElementById('stage') );
+	var stage = new GameStage( window.document.getElementById('stage') ),
+		p1 = new Player();
 
-	// var p1 = new Player();
-	// stage.addGameObject(p1);
+	stage.addGameObject( p1 );
 
 })(window);

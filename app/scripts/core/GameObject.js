@@ -3,11 +3,15 @@
 
 var GameObject = function() {
 
-	this.canvas = null;
-	this.uid = null;
-	this.active = true;
+	// Reference to the canvas.context
+	this.stg = null;
 
-	// this.initialize();
+	// Uniq id of the game object
+	this.uid = null;
+
+	// State of the game object. If this is "false" the object
+	// will not be rendered on the canvas
+	this.active = true;
 }
 
 var g = GameObject.prototype;
@@ -15,9 +19,9 @@ var g = GameObject.prototype;
 	/* 
 	* Constructor 
 	*/
-	g.initialize = function(context) {
+	g._initialize = function(context) {
 		if (typeof context === undefined) return false;
-		this.canvas = context;
+		this.stg = context;
 		
 		var date = new Date
 		this.uid = date.getTime();

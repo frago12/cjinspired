@@ -38,6 +38,11 @@ var gs = GameStage.prototype = new Stage();
 			self.loop();
 			requestAnimFrame(gameLoop);
 		})();
+
+		// setInterval(function() {
+		// 	self.update();
+		// 	self.draw();
+		// }, 1000/60);
 	};
 
 	/*
@@ -71,6 +76,8 @@ var gs = GameStage.prototype = new Stage();
 		this.context().clearRect(0, 0, this.width(), this.height());
 
 		// Render background
+		this.context().globalCompositeOperation = "source-over";
+
 		this.context().fillStyle = this.color;
 		this.context().fillRect(0, 0, this.width(), this.height());
 
@@ -93,7 +100,7 @@ var gs = GameStage.prototype = new Stage();
 	*/
 	gs.addGameObject = function(obj) {
 		if (obj instanceof GameObject) {
-			obj.initialize( this.context() );
+			obj._initialize( this.context() );
 			this.gameObjects.push(obj);
 		}
 	};
