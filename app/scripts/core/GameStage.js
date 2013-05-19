@@ -2,19 +2,23 @@
 	
 var GameStage = function(canvas) {
 
-	var gameObjects = [];
-	var callbacks = [];
+	this.gameObjects = [];
+	this.callbacks = [];
 	
 
 	this.FPS = 30;
-	this.color = '#efefef';
+	this.color = '#000000';
+
+	this.initialize(canvas);
+}
+
+var gs = GameStage.prototype = new Stage();
 
 	/*
 	* Construtor
 	*/
-	this.initialize = function() {
-		//GameStage.prototype = new Stage();
-		this.constructor(canvas);
+	gs.initialize = function(canvas) {
+		Stage.prototype.initialize.call(this, canvas);
 		
 		// Init controls
 		new GameControls();
@@ -26,28 +30,27 @@ var GameStage = function(canvas) {
 	/*
 	* Render the game stage
 	*/
-	this.render = function() {
+	gs.render = function() {
+		var self = this;
+
 		setInterval(function() {
-			update();
-			draw();
+			self.update();
+			self.draw();
 		}, 1000/this.FPS);
 	};
 
 	/*
 	* Game logic
 	*/
-	var update = function() {
+	gs.update = function() {
 		// Exec game objects
-		for(var i = 0, len = gameObjects.length; i < len; i++) {
-			if (gameObjects[i].active === true) gameObjects[i].update();
+		for(var i = 0, len = this.gameObjects.length; i < len; i++) {
+			if (this.gameObjects[i].active === true) this.gameObjects[i].update();
 		}
 
 		// Exec functions
-		for(var i = 0, len = callbacks.length; i < len; i++) {
-			
-			//callbacks[i]();
-			
-			callbacks[i].apply(this, Array.prototype.slice.call(arguments, 1));
+		for(var i = 0, len = this.callbacks.length; i < len; i++) {
+			this.callbacks[i].apply(this, Array.prototype.slice.call(arguments, 1));
 			
 		}
 	};
@@ -55,7 +58,7 @@ var GameStage = function(canvas) {
 	/* 
 	* Draw game objects
 	*/
-	var draw = proxy(function() {
+	gs.draw = function() {
 		this.context().clearRect(0, 0, this.width(), this.height());
 
 		// Render background
@@ -63,41 +66,36 @@ var GameStage = function(canvas) {
 		this.context().fillRect(0, 0, this.width(), this.height());
 
 		// Render game objects
-		for(var i = 0, len = gameObjects.length; i < len; i++) {
-			if (gameObjects[i].active === true) gameObjects[i].render();
+		for(var i = 0, len = this.gameObjects.length; i < len; i++) {
+			if (this.gameObjects[i].active === true) this.gameObjects[i].render();
 		}
-	}, this);
+	};
 
 	/*
 	* Exec function between the game life cycle according to FPS
 	*/
-	this.addCallback = function(fn) {
-		callbacks.push(fn);
+	gs.addCallback = function(fn) {
+		this.callbacks.push(fn);
 		
 	};
 
 	/*
 	*  Add game object to the stage
 	*/
-	this.addGameObject = function(obj) {
-		if (obj instanceof GameObject) gameObjects.push(obj);
+	gs.addGameObject = function(obj) {
+		if (obj instanceof GameObject) this.gameObjects.push(obj);
 	};
 
 	/*
 	* Delete a game object from the stage
 	*/
 	this.deleteGameObject = function(obj) {
-		for(var i = 0, len = gameObjects.length; i < len; i++) {
-			if (gameObjects[i].uid === obj.uid) {
-				gameObjects[i].active = false;
+		for(var i = 0, len = this.gameObjects.length; i < len; i++) {
+			if (this.gameObjects[i].uid === obj.uid) {
+				this.gameObjects[i].active = false;
 			}
 		}
 	};
-
-	this.initialize();
-}
-
-var g = GameStage.prototype = new Stage();
 
 window.GameStage = GameStage;
 }(window));

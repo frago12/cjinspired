@@ -6,10 +6,15 @@ var GameObject = function() {
 	this.uid = null;
 	this.active = true;
 
-	/*
-	* Constructor
+	this.initialize();
+}
+
+var g = GameObject.prototype;
+
+	/* 
+	* Constructor 
 	*/
-	this.initialize = function() {
+	g.initialize = function() {
 		if (typeof Stage.context === undefined) return false;
 		this.canvas = Stage.context;
 		
@@ -20,26 +25,15 @@ var GameObject = function() {
 	/*
 	* Logic for Game objects
 	*/
-	this.update = function() {
+	g.update = function() {
 		return null;
 	}
 
 	/*
 	* Draw game objects
 	*/
-	this.render = function() {
+	g.render = function() {
 		return null;
-	}
-
-	this.initialize();
-}
-
-var go = GameObject.prototype;
-
-	go.babies = [];
-	go.createBaby = function() {
-		var obj = { nombre: 'chuck' };
-		this.babies.push(obj);
 	}
 
 window.GameObject = GameObject;

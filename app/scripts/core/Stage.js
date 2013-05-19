@@ -1,57 +1,56 @@
 (function(window){
 
-var Stage = function(_canvas) {
-
-  	var canvas = null;
-
-  	/*
-  	* Constructor
-  	*/
-  	this.initialize = function(_canvas) {
-  		//if (canvas === undefined) return false;
-  		if (typeof (_canvas) === "undefined") return false;
-  		
-  		// FIX ME: document.body is null
-  		canvas = (canvas instanceof HTMLCanvasElement) ? canvas : document.body.appendChild(document.createElement('canvas'));
-  		canvas.width = 480;
-  		canvas.height = 320;
-
-  		// FIX ME: Should not be existe global variables
-  		window.Stage.context = canvas.getContext('2d');
-  	}
-
-    /*
-    * Get the canvas context
-    */
-    this.context = function() {
-        return canvas.getContext('2d');
-    }
-
-  	/*
-  	* Set attributes to the canvas
-  	*/
-  	this.setAttr = function(attr, value) {
-	   	canvas[attr] = value;
-	  }
-
-	/*
-	* Get or set canvas width
-	*/
-	this.width = function(_width) {
-		if (_width === undefined) return canvas.width;
-		canvas.width = _width;
-	}
-
-	/*
-	* Get or set canvas height
-	*/
-	this.height = function(_height) {
-		if (_height === undefined) return canvas.height;
-		canvas.height = _height;
-	}
-
-  this.initialize(_canvas);
+var Stage = function(canvas) {
+  this.initialize(canvas);
 }
+
+var s = Stage.prototype;
+
+  /*
+  * Constructor
+  */
+  s.initialize = function(canvas) {
+    if (typeof (canvas) === "undefined") return false;
+    this.canvas = canvas;
+    
+    // FIX ME: document.body is null
+    this.canvas = (this.canvas instanceof HTMLCanvasElement) ? this.canvas : window.document.body.appendChild(window.document.createElement('canvas'));
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+
+    this.context().fillStyle = 'black';
+    this.context().fillRect(0, 0, window.innerWidth, window.innerHeight);
+  }
+
+  /*
+  * Get the canvas context
+  */
+  s.context = function() {
+      return this.canvas.getContext('2d');
+  }
+
+  /*
+  * Set attributes to the canvas
+  */
+  s.setAttr = function(attr, value) {
+    this.canvas[attr] = value;
+  }
+
+  /*
+  * Get or set canvas width
+  */
+  s.width = function(_width) {
+    if (_width === undefined) return this.canvas.width;
+    this.canvas.width = _width;
+  }
+
+  /*
+  * Get or set canvas height
+  */
+  s.height = function(_height) {
+    if (_height === undefined) return this.canvas.height;
+    this.canvas.height = _height;
+  }
 
 window.Stage = Stage;
 }(window));
