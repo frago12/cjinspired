@@ -1,4 +1,5 @@
 (function(window) {
+'use strict';
 	
 var GameStage = function(canvas) {
 
@@ -91,13 +92,16 @@ var gs = GameStage.prototype = new Stage();
 	*  Add game object to the stage
 	*/
 	gs.addGameObject = function(obj) {
-		if (obj instanceof GameObject) this.gameObjects.push(obj);
+		if (obj instanceof GameObject) {
+			obj.initialize( this.context() );
+			this.gameObjects.push(obj);
+		}
 	};
 
 	/*
 	* Delete a game object from the stage
 	*/
-	this.deleteGameObject = function(obj) {
+	gs.deleteGameObject = function(obj) {
 		for(var i = 0, len = this.gameObjects.length; i < len; i++) {
 			if (this.gameObjects[i].uid === obj.uid) {
 				this.gameObjects[i].active = false;
@@ -107,7 +111,7 @@ var gs = GameStage.prototype = new Stage();
 
 
 window.requestAnimFrame = (function(){
-	return  window.requestAnimationFrame       || 
+	return  window.requestAnimationFrame   || 
 		window.webkitRequestAnimationFrame || 
 		window.mozRequestAnimationFrame    || 
 		window.oRequestAnimationFrame      || 

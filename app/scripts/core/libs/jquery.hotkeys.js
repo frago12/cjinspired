@@ -11,6 +11,7 @@
 */
 
 (function(jQuery){
+	'use strict';
 
 	jQuery.hotkeys = {
 		version: "0.8",

@@ -1,4 +1,5 @@
 (function(window){
+'use strict';
 
 var Stage = function(canvas) {
   this.initialize(canvas);

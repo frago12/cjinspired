@@ -1,4 +1,5 @@
 (function(window) {
+'use strict';
 
 var GameObject = function() {
 
@@ -6,7 +7,7 @@ var GameObject = function() {
 	this.uid = null;
 	this.active = true;
 
-	this.initialize();
+	// this.initialize();
 }
 
 var g = GameObject.prototype;
@@ -14,9 +15,9 @@ var g = GameObject.prototype;
 	/* 
 	* Constructor 
 	*/
-	g.initialize = function() {
-		if (typeof Stage.context === undefined) return false;
-		this.canvas = Stage.context;
+	g.initialize = function(context) {
+		if (typeof context === undefined) return false;
+		this.canvas = context;
 		
 		var date = new Date
 		this.uid = date.getTime();
