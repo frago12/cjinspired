@@ -33,10 +33,18 @@ var gs = GameStage.prototype = new Stage();
 	gs.render = function() {
 		var self = this;
 
-		setInterval(function() {
-			self.update();
-			self.draw();
-		}, 1000/this.FPS);
+		(function gameLoop() {
+			self.loop();
+			requestAnimFrame(gameLoop);
+		})();
+	};
+
+	/*
+	* Game loop
+	*/
+	gs.loop = function() {
+		this.update();
+		this.draw();
 	};
 
 	/*
@@ -96,6 +104,18 @@ var gs = GameStage.prototype = new Stage();
 			}
 		}
 	};
+
+
+window.requestAnimFrame = (function(){
+	return  window.requestAnimationFrame       || 
+		window.webkitRequestAnimationFrame || 
+		window.mozRequestAnimationFrame    || 
+		window.oRequestAnimationFrame      || 
+		window.msRequestAnimationFrame     || 
+		function( callback , element){
+			window.setTimeout(callback, 1000 / 60);
+		};
+})();
 
 window.GameStage = GameStage;
 }(window));
