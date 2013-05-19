@@ -1,17 +1,16 @@
 (function(window, undefined) {
 	'use strict';
 
-	var Particle = function(mouse) {
+	var Particle = function(location) {
 		var W = window.innerWidth,
 			H = window.innerHeight;
 
 		// speed.x range = -2.5 to 2.5
 		// speed.y range = -15 to -5 to make it move upwards
-		this.speed = { x:-0.5+Math.random()*4, y:-0.5+Math.random()*2 };
+		this.speed = { x:-2.5+Math.random()*5, y:-0.5+Math.random()*2 };
 
-		// location = mouse coorddinates
-		if (typeof( mouse ) != "undefined" && mouse.x && mouse.y) this.location = { x: mouse.x, y: mouse.y };
-		else this.location = { x: W/2, y: H/2 };
+		// location
+		this.location = { x: location.x, y: location.y };
 
 		// radius range = 10 to 30
 		this.radius = 20;
