@@ -45,6 +45,7 @@
 
 
 				this.stg.arc(p.location.x, p.location.y, p.radius, Math.PI*2, false);
+				console.log( RGraph );
 				this.stg.fill();
 				this.stg.closePath();
 
