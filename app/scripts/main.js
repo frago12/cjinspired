@@ -6,6 +6,8 @@
 		automatedPlayer = new AutomatedPlayer();
 
 	stage.addGameObject( automatedPlayer );
-	stage.addGameObject( p1 );
+	// stage.addGameObject( p1 );
+
+	stage.addMouseEvent('click', [ automatedPlayer._click_move ]);
 
 })(window);

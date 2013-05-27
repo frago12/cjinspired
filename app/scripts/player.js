@@ -55,19 +55,19 @@
 		p.update = function() {
 			// console.log(keydown.left);
 			if (keydown.left) {
-				this.location.x -= this.speed;
+				this.location.x -= this.vx;
 			}
 
 			if (keydown.right) {
-				this.location.x += this.speed;
+				this.location.x += this.vx;
 			}
 
 			if (keydown.up) {
-				this.location.y -= this.speed;
+				this.location.y -= this.vy;
 			}
 
 			if (keydown.down) {
-				this.location.y += this.speed;
+				this.location.y += this.vy;
 			}
 		}
 

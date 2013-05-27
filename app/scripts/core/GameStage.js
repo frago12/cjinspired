@@ -116,6 +116,39 @@ var gs = GameStage.prototype = new Stage();
 		}
 	};
 
+	/*
+	* Register mouse events to the stage
+	*/
+	gs.addMouseEvent = function(eventName, actions) {
+		var _fn = function(e) {
+			for ( var i=0,len=actions.length; i<len; i++ ) {
+				actions[i](e);
+			}
+		}
+
+		switch (eventName) {
+			
+			case 'click':
+				this.canvas.addEventListener('click', _fn);
+				break;
+			
+			case 'mousedown':
+				this.canvas.addEventListener('mousedown', _fn);
+				break;
+
+			case 'mouseup':
+				this.canvas.addEventListener('mouseup', _fn);
+				break;
+
+			case 'mousemove':
+				this.canvas.addEventListener('mousemove', _fn);
+				break;
+
+			default:
+				break;
+		}
+	}
+
 
 window.requestAnimFrame = (function(){
 	return  window.requestAnimationFrame   || 
