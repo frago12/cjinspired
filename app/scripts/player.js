@@ -4,13 +4,6 @@
 	var Player = function() {
 		this.particles = [];
 
-		this.speed = 1;
-
-		this.location = {
-			x : window.innerWidth / 2,
-			y : window.innerHeight / 2
-		}
-
 		this.initialize();
 	}
 
@@ -45,7 +38,6 @@
 
 
 				this.stg.arc(p.location.x, p.location.y, p.radius, Math.PI*2, false);
-				console.log( RGraph );
 				this.stg.fill();
 				this.stg.closePath();
 
@@ -68,6 +60,14 @@
 
 			if (keydown.right) {
 				this.location.x += this.speed;
+			}
+
+			if (keydown.up) {
+				this.location.y -= this.speed;
+			}
+
+			if (keydown.down) {
+				this.location.y += this.speed;
 			}
 		}
 

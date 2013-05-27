@@ -12,6 +12,17 @@ var GameObject = function() {
 	// State of the game object. If this is "false" the object
 	// will not be rendered on the canvas
 	this.active = true;
+
+	// Speed of the game object
+	this.speed = 1;
+
+	// Screen location of the game object
+	this.location = {
+		x : window.innerWidth / 2,
+		y : window.innerHeight / 2
+	}
+
+
 }
 
 var g = GameObject.prototype;
