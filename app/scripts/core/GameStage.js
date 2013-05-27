@@ -64,8 +64,8 @@ var gs = GameStage.prototype = new Stage();
 
 		// Exec functions
 		for(var i = 0, len = this.callbacks.length; i < len; i++) {
-			this.callbacks[i].apply(this, Array.prototype.slice.call(arguments, 1));
-			
+			var _callback = this.callbacks[i];
+			_callback.fn.apply( _callback.object, Array.prototype.slice.call( _callback.arguments ) );
 		}
 	};
 
@@ -120,9 +120,13 @@ var gs = GameStage.prototype = new Stage();
 	* Register mouse events to the stage
 	*/
 	gs.addMouseEvent = function(eventName, actions) {
-		var _fn = function(e) {
+		var self = this,
+			_fn = function(e) {
 			for ( var i=0,len=actions.length; i<len; i++ ) {
-				actions[i](e);
+				var action = actions[i];
+				
+				action.arguments = [e];
+				self.addCallback( action );
 			}
 		}
 

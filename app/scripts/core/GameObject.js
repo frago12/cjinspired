@@ -25,6 +25,12 @@ var GameObject = function() {
 		y : 0
 	}
 
+	// Alpha value of the game object
+	this.alpha = 1;
+
+	// Rotation value of the game object
+	this.rotation  = 0;
+
 
 }
 

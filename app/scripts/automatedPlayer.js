@@ -20,14 +20,9 @@
 			this.stg.closePath();
 		}
 
-		a.update = function() {
-			this.applyMovement( 'simpleEasing' );
-		}
-
 		a._click_move = function(e) {
-			e.preventDefault();
-
-			console.log( e.currentTarget );
+			//console.log( this );
+			this.simpleEasing( 0.2, e.pageX, e.pageY );
 		}
 
 window.AutomatedPlayer = AutomatedPlayer;

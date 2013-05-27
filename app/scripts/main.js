@@ -8,6 +8,8 @@
 	stage.addGameObject( automatedPlayer );
 	// stage.addGameObject( p1 );
 
-	stage.addMouseEvent('click', [ automatedPlayer._click_move ]);
+	stage.addMouseEvent('click', [ 
+		{object: automatedPlayer, fn: automatedPlayer._click_move} 
+	]);
 
 })(window);
