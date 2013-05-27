@@ -91,8 +91,8 @@ var gs = GameStage.prototype = new Stage();
 	* Exec function between the game life cycle according to FPS
 	*/
 	gs.addCallback = function(fn) {
-		this.callbacks.push(fn);
-		
+		// this.callbacks.push(fn);
+		this.callbacks[0] = fn;
 	};
 
 	/*

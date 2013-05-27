@@ -31,7 +31,8 @@ var GameObject = function() {
 	// Rotation value of the game object
 	this.rotation  = 0;
 
-
+	// Friction of the object
+	this.friction = 0;
 }
 
 var g = GameObject.prototype;

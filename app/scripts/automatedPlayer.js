@@ -21,8 +21,14 @@
 		}
 
 		a._click_move = function(e) {
-			//console.log( this );
-			this.simpleEasing( 0.2, e.pageX, e.pageY );
+			// Easing
+			// this.simpleEasing( 0.2, e.pageX, e.pageY );
+			
+			// Spring
+			this.vx = 0;
+			this.vy = 0;
+			this.friction = 0.95;
+			this.spring( 0.1, e.pageX, e.pageY );
 		}
 
 window.AutomatedPlayer = AutomatedPlayer;
